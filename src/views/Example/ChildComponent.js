@@ -12,21 +12,18 @@ class ChildComponent extends React.Component {
             showJob: !this.state.showJob
         })
     }
+    handeleOnClickDelete = (job) => {
+        console.log('>>>> handleOnClickDelete:', job)
+        this.props.deleteaAJob(job)
+    }
     render() {
         // console.log(`>>>check props: `, this.props)
-
-        // let firstname = this.props.firstname
-        // let lastname = this.props.lastname
         // key = value =>  
-        let { firstname, lastname, arrJobs } = this.props;
+        let { arrJobs } = this.props;
         let { showJob } = this.state;
         let check = showJob === true ? 'showjJob = true' : 'showJob = false';
         return (
             <>
-                <br />
-                <div>Child Component: {firstname} {lastname}</div>
-                <br />
-
                 {showJob === false ?
                     <div>
                         <button onClick={() => this.handleShowHiden()}>Show</button>
@@ -39,11 +36,13 @@ class ChildComponent extends React.Component {
                                     return (
                                         <div key={item.id}>
                                             {item.title} - {item.salary} $
+                                            <span onClick={() => this.handeleOnClickDelete(item)} style={{ cursor: 'pointer' }}>x</span>
                                         </div>
                                     )
                                 })
                             }
                         </div>
+
                         <div>
                             <button onClick={() => this.handleShowHiden()}>Hiden</button>
                         </div>
